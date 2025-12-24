@@ -52,7 +52,15 @@ foreach (var world in worlds)
     Console.WriteLine();
 }
 
-var selectedWorld = worlds[0]; // testing, will change to wtv gui interaction
+//var selectedWorld = worlds[0]; // testing, will change to wtv gui interaction
+for (int i = 0; i< worlds.Count; i++)
+{
+    Console.WriteLine($"{i + 1}. {worlds[i].Key}");
+}
+Console.Write("\nSelect world number: ");
+int choice = int.Parse(Console.ReadLine()!) - 1;
+var selectedWorld = worlds[choice];
+
 string worldName = selectedWorld.Key;
 string worldStagingDir = Path.Combine(stagingPath, worldName);
 
