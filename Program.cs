@@ -3,6 +3,7 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Collections.Generic;
+using System.IO.Compression;
 
 string worldsPath = Path.Combine(
     Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
@@ -57,7 +58,7 @@ string worldStagingDir = Path.Combine(stagingPath, worldName);
 
 Directory.CreateDirectory(worldStagingDir);
 
-Console.WriteLine($"Copying world '{worldName} to staging...\n");
+Console.WriteLine($"Copying world '{worldName}' to staging...\n");
 
 foreach(var file in selectedWorld)
 {
@@ -69,3 +70,39 @@ foreach(var file in selectedWorld)
 }
 
 Console.WriteLine("\nDone");
+
+string zipPath = Path.Combine(stagingPath, $"{worldName}.zip");
+if (File.Exists(zipPath))
+{
+    File.Delete(zipPath); //gets deleted because old or wtv
+}
+
+Console.WriteLine($"Creating zip: {zipPath}");
+
+ZipFile.CreateFromDirectory(
+    worldStagingDir,
+    zipPath,
+    CompressionLevel.Optimal,
+    includeBaseDirectory: false
+);
+
+Console.WriteLine("Zip created successfully.");
+
+string oldWorldsPath = Path.Combine(
+    Directory.GetCurrentDirectory(),
+    "old_worlds",
+    worldName
+);
+
+Directory.CreateDirectory(oldWorldsPath); //same stuff
+
+string timestamp = DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss");
+
+string archivedZipPath = Path.Combine(
+    oldWorldsPath,
+    $"{timestamp}.zip"
+);
+
+File.Move(zipPath, archivedZipPath);
+Console.WriteLine($"Archived world to: {archivedZipPath}");
+//TODO add the delete or disabling by moving paths in actual terraria fodlers. Dont wanna lose worlds tho (at least now).
