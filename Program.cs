@@ -117,6 +117,27 @@ string archivedZipPath = Path.Combine(
 File.Move(zipPath, archivedZipPath);
 Console.WriteLine($"Archived world to: {archivedZipPath}");
 //TODO add the delete or disabling by moving paths in actual terraria fodlers. Dont wanna lose worlds tho (at least now).
+string disabledWorldsPath = Path.Combine(
+    Directory.GetCurrentDirectory(),
+    "disabled_worlds",
+    worldName
+); //Do I really wanna do that idk. Also do I really wanna do it here and not in tmodlaoder/worlds idk
+Directory.CreateDirectory(disabledWorldsPath);
+foreach (var file in selectedWorld)
+{
+    string source = Path.Combine(worldsPath, file);
+    string destination = Path.Combine(disabledWorldsPath, file);
+
+    File.Move(source, destination, overwrite:true);
+}
+Console.WriteLine($"World '{worldName}' moved to disabled_worlds.");
+
+//for versioning history (who was prev host etc)
+string historyFile = Path.Combine(oldWorldsPath, "history.txt");
+string hostName = Environment.UserName; //TODO change to user gui or steam  username or something
+string historyEntry = $"{DateTime.Now:yyyy-MM-dd HH:mm:ss} - Host: {hostName}";
+File.AppendAllText(historyFile, historyEntry + Environment.NewLine);
+Console.WriteLine("Host history updated.");
 
 Console.WriteLine($"Cleaning up staging folder: {worldStagingDir}");
 
