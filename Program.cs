@@ -60,12 +60,15 @@ Directory.CreateDirectory(worldStagingDir);
 
 Console.WriteLine($"Copying world '{worldName}' to staging...\n");
 
+File.SetAttributes(worldStagingDir, FileAttributes.Normal); //needed because seems like code made dirs are readonly
 foreach(var file in selectedWorld)
 {
     string source = Path.Combine(worldsPath, file);
     string destination = Path.Combine(worldStagingDir, file);
 
     File.Copy(source, destination, overwrite: true);
+    File.SetAttributes(destination, FileAttributes.Normal); //jsut in case we get a dir like situation in the futurue
+
     Console.WriteLine($"Copied: {file}");
 }
 
@@ -106,3 +109,27 @@ string archivedZipPath = Path.Combine(
 File.Move(zipPath, archivedZipPath);
 Console.WriteLine($"Archived world to: {archivedZipPath}");
 //TODO add the delete or disabling by moving paths in actual terraria fodlers. Dont wanna lose worlds tho (at least now).
+
+Console.WriteLine($"Cleaning up staging folder: {worldStagingDir}");
+
+if (Directory.Exists(worldStagingDir))
+{
+    try
+    {
+        //Small delay to ensure zip file handles are realesed and we can actually def parent folder
+        System.Threading.Thread.Sleep(100);
+
+        Directory.Delete(worldStagingDir,recursive: true);
+        Console.WriteLine("Staging cleanup completed.");
+    }
+    catch(IOException ex)
+    {
+        Console.WriteLine("Cleanup failed (probably file lock).");
+        Console.WriteLine(ex.Message);
+        //TODO implement a retry system or find out if I can manually close handles
+    }
+}
+else
+{
+    Console.WriteLine("Staging folder already clean.");
+}
