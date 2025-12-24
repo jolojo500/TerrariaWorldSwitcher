@@ -20,3 +20,4 @@ Thumbs.db
 #optional: world bundles / temp data (for testing purps)
 staging/
 old_worlds/
+disabled_worlds/
