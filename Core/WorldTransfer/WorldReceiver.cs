@@ -21,7 +21,7 @@ public static class WorldReceiver
 
         //lire la taille du fichier
         byte[] sizeBuffer = new byte[8];
-        networkStream.Read(sizeBuffer,0,8);
+        networkStream.Read(sizeBuffer,0,8); //TODO maybe helper func that has looping because currently reads until 8 bytes. Means can be less we never know but tcp should handle so idk why warning
         long totalBytes = BitConverter.ToInt64(sizeBuffer, 0);
 
         long receivedBytes = 0;        
