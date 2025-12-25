@@ -6,6 +6,7 @@ public static class WorldDisabler
 
         Directory.CreateDirectory(disabledDir);
 
+        File.SetAttributes(disabledDir, FileAttributes.Normal);
         foreach (var file in world.Files)
         {
             string source = Path.Combine(Paths.Worlds, file);

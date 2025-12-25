@@ -8,6 +8,7 @@ public static class WorldArchiver
         );
 
         Directory.CreateDirectory(worldArchiveDir);
+        File.SetAttributes(worldArchiveDir, FileAttributes.Normal);
 
         string timestamp = DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss");
 
