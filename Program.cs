@@ -4,7 +4,8 @@ Console.WriteLine("=== Terraria World Manager ===\n");
 
 Console.WriteLine("1. Archive & disable a world");
 Console.WriteLine("2. Restore a world");
-Console.WriteLine("3. Exit");
+Console.WriteLine("3. Network transfer (TEST)");
+Console.WriteLine("4. Exit");
 
 Console.Write("\nSelect option: ");
 int mainChoice = int.Parse(Console.ReadLine()!);
@@ -24,6 +25,10 @@ switch (mainChoice)
         break;
 
     case 3:
+        RunNetworkTest();
+        break;
+    
+    case 4:
         return;
 
     default:
@@ -198,3 +203,29 @@ static void RestoreFromArchive()
     Console.WriteLine("\nWorld restored from archive successfully.");
 }
 
+static void RunNetworkTest()
+{
+    Console.WriteLine("Network test:\n");
+    Console.WriteLine("1. Host (send world)");
+    Console.WriteLine("2. Connect (receive world)");
+
+    Console.Write("\nSelect option: ");
+    int choice = int.Parse(Console.ReadLine()!);
+    Console.WriteLine();
+
+    if (choice == 1)
+    {
+        Console.Write("Path to world zip: ");
+        string zipPath = Console.ReadLine()!; //Aka hard coded for now and why bother menu
+
+        WorldSender.SendWorld(zipPath);
+    }
+    else if (choice == 2)
+    {
+        Console.Write("Host IP: ");
+        string hostIp = Console.ReadLine()!;
+
+        string receivedZip = WorldReceiver.ReceiveWorld(hostIp);
+        Console.WriteLine($"Received at: {receivedZip}");
+    }
+}
