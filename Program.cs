@@ -1,3 +1,5 @@
+AppContext.SetState(AppState.Idle);
+
 Console.WriteLine("=== Terraria World Manager ===\n");
 
 Console.WriteLine("1. Archive & disable a world");
@@ -40,6 +42,10 @@ static void RunArchiveFlow()
         return;
     }
 
+    
+    AppContext.SetState(AppState.SelectingWorld);
+
+
     Console.WriteLine("Detected worlds:\n");
     for (int i = 0; i < worlds.Count; i++)
     {
@@ -59,9 +65,11 @@ static void RunArchiveFlow()
     string zipPath = WorldZipper.ZipWorld(stagingDir, selectedWorld.Name);
     Console.WriteLine($"World zipped at: {zipPath}");
 
+    AppContext.SetState(AppState.Archiving);
     string archivedZipPath = WorldArchiver.Archive(zipPath, selectedWorld.Name);
     Console.WriteLine($"World archived at: {archivedZipPath}");
 
+    AppContext.SetState(AppState.Disabling);
     string disabledDir = WorldDisabler.Disable(selectedWorld);
     Console.WriteLine($"World disabled at: {disabledDir}");
 
@@ -72,6 +80,7 @@ static void RunArchiveFlow()
     Console.WriteLine("\nProcess completed successfully.");
     Console.WriteLine($"Archived: {archivedZipPath}");
     Console.WriteLine($"Disabled: {disabledDir}");
+    AppContext.SetState(AppState.Done);
 }
 
 static void RunRestoreFlow()
@@ -131,7 +140,9 @@ static void RestoreDisabled()
 
     string worldName = worlds[choice];
 
+    AppContext.SetState(AppState.Restoring);
     WorldRestorer.RestoreDisabledWorld(worldName);
+    AppContext.SetState(AppState.Done);
 
     Console.WriteLine($"\nWorld '{worldName}' restored successfully.");
 }
@@ -180,7 +191,9 @@ static void RestoreFromArchive()
     Console.Write("\nSelect archive: ");
     int zipChoice = int.Parse(Console.ReadLine()!) - 1;
 
+    AppContext.SetState(AppState.Restoring);
     WorldRestorer.RestoreFromArchive(zips[zipChoice]);
+    AppContext.SetState(AppState.Done);
 
     Console.WriteLine("\nWorld restored from archive successfully.");
 }
