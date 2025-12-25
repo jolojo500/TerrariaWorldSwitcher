@@ -218,14 +218,20 @@ static void RunNetworkTest()
         Console.Write("Path to world zip: ");
         string zipPath = Console.ReadLine()!; //Aka hard coded for now and why bother menu
 
-        WorldSender.SendWorld(zipPath);
+        WorldSender.SendWorld(zipPath, (sent, total) =>
+        {
+            Console.WriteLine($"Sent {sent *100 /total}%");
+        });
     }
     else if (choice == 2)
     {
         Console.Write("Host IP: ");
         string hostIp = Console.ReadLine()!;
 
-        string receivedZip = WorldReceiver.ReceiveWorld(hostIp);
+        string receivedZip = WorldReceiver.ReceiveWorld(hostIp, (recv, total) =>
+        {
+            Console.WriteLine($"Received {recv *100 /total}%");
+        });
         Console.WriteLine($"Received at: {receivedZip}");
     }
 }
