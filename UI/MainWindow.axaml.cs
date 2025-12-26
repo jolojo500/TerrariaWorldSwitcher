@@ -8,4 +8,11 @@ public partial class MainWindow : Window
     {
         InitializeComponent();
     }
+
+
+    private void OnNetworkTestClicked(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+    {
+        StatusText.Text = "Network test clicked!";
+    }
+
 }

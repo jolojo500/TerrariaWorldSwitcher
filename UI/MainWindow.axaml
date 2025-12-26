@@ -5,5 +5,19 @@
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="UI.MainWindow"
         Title="UI">
-    Welcome to Avalonia!
+    <StackPanel
+    VerticalAlignment="Center"
+    HorizontalAlignment="Center"
+    Spacing="10">
+
+       <TextBlock x:Name="StatusText" Text="Ready"/>
+       
+        <Button
+            Content="Network Test"
+            Width="200"
+            Click="OnNetworkTestClicked"/>
+
+            
+    </StackPanel>
+
 </Window>
