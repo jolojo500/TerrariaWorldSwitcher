@@ -1,0 +1,53 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:models="clr-namespace:UI.Models"
+             x:Class="UI.Views.WorldListView">
+    
+    <Grid RowDefinitions="Auto,*" Margin="20">
+        
+        <!-- Header -->
+        <StackPanel Grid.Row="0" Spacing="10" Margin="0,0,0,20">
+            <TextBlock Text="🗺️ Your Terraria Worlds" 
+                       FontSize="28" 
+                       FontWeight="Bold"/>
+            <TextBlock Text="Select a world to manage or transfer hosting"
+                       FontSize="14"
+                       Opacity="0.7"/>
+        </StackPanel>
+
+        <!-- World List -->
+        <ScrollViewer Grid.Row="1">
+            <ItemsControl x:Name="WorldsItemsControl">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate DataType="models:WorldDisplayInfo">
+                        <!-- Card for each world -->
+                        <Border Background="#3B4252"
+                                CornerRadius="8"
+                                Padding="20"
+                                Margin="0,0,0,15"
+                                Cursor="Hand">
+                            <Border.Styles>
+                                <Style Selector="Border:pointerover">
+                                    <Setter Property="Background" Value="#434C5E"/>
+                                </Style>
+                            </Border.Styles>
+                            
+                            <StackPanel Spacing="8">
+                                <TextBlock Text="{Binding Name}"
+                                           FontSize="20"
+                                           FontWeight="SemiBold"/>
+                                <TextBlock Text="{Binding SizeFormatted}"
+                                           FontSize="13"
+                                           Opacity="0.7"/>
+                                <TextBlock Text="{Binding LastModified}"
+                                           FontSize="13"
+                                           Opacity="0.7"/>
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+        
+    </Grid>
+</UserControl>

@@ -1,0 +1,17 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="UI.Views.WorldHistoryView">
+    
+    <StackPanel Margin="20" Spacing="20">
+        <TextBlock Text="📜 World History" 
+                   FontSize="24" 
+                   FontWeight="Bold"/>
+        
+        <Button Content="⬅️ Back" 
+                Click="OnBackClicked"
+                Width="100"/>
+        
+        <TextBlock Text="History view coming soon..."/>
+    </StackPanel>
+    
+</UserControl>

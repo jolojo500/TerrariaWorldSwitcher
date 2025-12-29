@@ -1,0 +1,20 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="UI.Views.WorldDetailsView">
+    
+    <StackPanel Margin="20" Spacing="20">
+        <TextBlock x:Name="WorldNameText" 
+                   FontSize="24" 
+                   FontWeight="Bold"/>
+        
+        <Button Content="⬅️ Back" 
+                Click="OnBackClicked"
+                Width="100"/>
+        
+        <Button Content="🚀 Transfer Host" 
+                Click="OnTransferHostClicked"
+                Width="200"
+                Height="50"/>
+    </StackPanel>
+    
+</UserControl>
