@@ -1,0 +1,71 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="UI.Views.ReceiveWorldDialog"
+        Title="Receive World"
+        Width="500" Height="350"
+        CanResize="False"
+        WindowStartupLocation="CenterOwner">
+    
+    <Grid RowDefinitions="Auto,*,Auto" Margin="20">
+        
+        <!--Header-->
+        <StackPanel Grid.Row="0" Spacing="10" Margin="0,0,0,20">
+            <TextBlock Text="📥 Receive World From Host" 
+                       FontSize="24" 
+                       FontWeight="Bold"/>
+            <TextBlock Text="Enter the host's IP address to receive their world"
+                       FontSize="13"
+                       Opacity="0.7"/>
+        </StackPanel>
+        
+        <!--Content-->
+        <StackPanel Grid.Row="1" Spacing="15">
+            
+            <!--ip input-->
+            <StackPanel Spacing="5">
+                <TextBlock Text="Host IP Address:" FontWeight="SemiBold"/>
+                <TextBox x:Name="IpInput"
+                         Watermark="e.g. 192.168.1.100 or 127.0.0.1"
+                         FontSize="16"
+                         Height="40"/>
+            </StackPanel>
+            
+            <!--status area-->
+            <Border Background="#3B4252"
+                    CornerRadius="8"
+                    Padding="15"
+                    MinHeight="100">
+                <StackPanel Spacing="10">
+                    <TextBlock x:Name="StatusText"
+                               Text="Ready to connect"
+                               TextWrapping="Wrap"/>
+                    
+                    <ProgressBar x:Name="ReceiveProgress"
+                                 IsVisible="False"
+                                 Height="8"/>
+                    
+                    <TextBlock x:Name="ProgressText"
+                               IsVisible="False"
+                               FontSize="12"
+                               Opacity="0.7"/>
+                </StackPanel>
+            </Border>
+            
+        </StackPanel>
+        
+        
+        <StackPanel Grid.Row="2" 
+                    Orientation="Horizontal" 
+                    HorizontalAlignment="Right"
+                    Spacing="10">
+            <Button Content="Cancel"
+                    Click="OnCancelClicked"
+                    Width="100"/>
+            <Button x:Name="ConnectButton"
+                    Content="Connect"
+                    Click="OnConnectClicked"
+                    Width="100"/>
+        </StackPanel>
+        
+    </Grid>
+</Window>

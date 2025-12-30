@@ -30,14 +30,10 @@ public partial class MainWindow : Window
     // Action du bouton "Receive World"
     private async void OnReceiveWorldClicked(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
     {
-        // TODO: implement this later
-        var dialog = new Window
-        {
-            Title = "Receive World",
-            Width = 400,
-            Height = 200,
-            Content = new TextBlock { Text = "Feature coming soon!" }
-        };
+        var dialog = new Views.ReceiveWorldDialog();
         await dialog.ShowDialog(this);
+    
+        //refreshes world list after possibly getting one
+        NavigateToWorldList();
     }
 }
