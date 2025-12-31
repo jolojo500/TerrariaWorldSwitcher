@@ -1,4 +1,4 @@
-# Terraria World Host Transfer
+# Terraria World Switcher
 
 A cross-platform desktop app that simplifies hosting Terraria worlds with friends via **direct peer-to-peer transfer** — no Discord file uploads, no manual file management.
 
