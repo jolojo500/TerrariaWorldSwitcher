@@ -57,9 +57,8 @@ public partial class WorldDetailsView : UserControl
                 {
                     StatusText.Text = "Waiting for client connection...";
                     IpText.Text = $"Your IP: {localIp}";
-                    IpText.IsVisible = true;
-                    TransferProgress.IsVisible = true;
-                    ProgressText.IsVisible = true;
+                    IpBox.IsVisible = true;
+                    ProgressPanel.IsVisible = true;
                 });
                 
                 //Send world (no actions can be done until sent)

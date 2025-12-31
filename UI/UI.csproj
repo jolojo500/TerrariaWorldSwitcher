@@ -22,5 +22,9 @@
   <ItemGroup>
     <ProjectReference Include="..\TerrariaWorldSwitcher.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <AvaloniaResource Include="Assets\**" />
+  </ItemGroup>
   
 </Project>

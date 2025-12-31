@@ -2,23 +2,50 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         x:Class="UI.MainWindow"
         Title="Terraria World Host Transfer"
-        Width="900" Height="600"
-        MinWidth="700" MinHeight="500">
+        Width="1000" Height="700"
+        MinWidth="800" MinHeight="600"
+        Background="#1E1E1E"
+        Icon="avares://UI/Assets/TerrariaWorldSwitcherLogoV2.png">
+        <!-- UNFORTUNATELY v3 looks better (unfortunate because damn whole left side gone) and v2.5 doesnt change a thing so maybe TODO check how desktop apps manage icons (maybe windows docs)-->    
     
-    <Grid>
+    <Grid RowDefinitions="*, Auto">
         <!-- Page content will get displayed here -->
-        <ContentControl x:Name="PageContent" />
+        <ContentControl x:Name="PageContent" Grid.Row="0" />
         
         <!-- "Receive world" button always here -->
-        <Border Background="#2E3440" 
-                Padding="15"
-                VerticalAlignment="Bottom">
-            <Button Content="📥 Receive World From Host"
-                    HorizontalAlignment="Center"
-                    Click="OnReceiveWorldClicked"
-                    Width="250"
-                    Height="40"
-                    Background="Aquamarine"/>
+        <Border Grid.Row="1" 
+                BorderThickness="0,1,0,0"
+                Padding="20,15">
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,0%">
+                    <GradientStop Color="#252526" Offset="0"/>
+                    <GradientStop Color="#2D2D30" Offset="0.5"/>
+                    <GradientStop Color="#252526" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+            <Border.BorderBrush>
+                <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,0%">
+                    <GradientStop Color="#3F3F46" Offset="0"/>
+                    <GradientStop Color="#8B7ECC" Offset="0.5"/>
+                    <GradientStop Color="#3F3F46" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.BorderBrush>
+    
+            <StackPanel Orientation="Horizontal" 
+                        HorizontalAlignment="Center"
+                        Spacing="15">
+                <TextBlock Text="📥" 
+                           FontSize="20"
+                           VerticalAlignment="Center"/>
+                <TextBlock Text="Want to receive a world from another host?"
+                           VerticalAlignment="Center"
+                           Opacity="0.8"/>
+                <Button Content="Receive World"
+                        Click="OnReceiveWorldClicked"
+                        Classes="primary"
+                        Height="36"
+                        Padding="20,0"/>
+            </StackPanel>
         </Border>
     </Grid>
 </Window>

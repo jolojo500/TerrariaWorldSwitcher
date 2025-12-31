@@ -2,69 +2,81 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         x:Class="UI.Views.ReceiveWorldDialog"
         Title="Receive World"
-        Width="500" Height="350"
+        Width="550" Height="380"
         CanResize="False"
-        WindowStartupLocation="CenterOwner">
+        WindowStartupLocation="CenterOwner"
+        Background="#1E1E1E">
     
-    <Grid RowDefinitions="Auto,*,Auto" Margin="20">
+    <Grid RowDefinitions="Auto,*,Auto" Margin="30">
         
-        <!--Header-->
-        <StackPanel Grid.Row="0" Spacing="10" Margin="0,0,0,20">
-            <TextBlock Text="📥 Receive World From Host" 
-                       FontSize="24" 
-                       FontWeight="Bold"/>
-            <TextBlock Text="Enter the host's IP address to receive their world"
+        <!-- Header -->
+        <StackPanel Grid.Row="0" Spacing="8" Margin="0,0,0,24">
+            <TextBlock Text="📥 Receive World" 
+                       FontSize="28" 
+                       FontWeight="Bold"
+                       Foreground="#FFFFFF"/>
+            <TextBlock Text="Connect to a host to receive their world"
                        FontSize="13"
-                       Opacity="0.7"/>
+                       Opacity="0.6"/>
         </StackPanel>
         
-        <!--Content-->
-        <StackPanel Grid.Row="1" Spacing="15">
+        <!-- Content -->
+        <StackPanel Grid.Row="1" Spacing="20">
             
-            <!--ip input-->
-            <StackPanel Spacing="5">
-                <TextBlock Text="Host IP Address:" FontWeight="SemiBold"/>
+            <!-- IP Input -->
+            <StackPanel Spacing="8">
+                <TextBlock Text="Host IP Address" 
+                           FontWeight="SemiBold"
+                           FontSize="13"
+                           Opacity="0.8"/>
                 <TextBox x:Name="IpInput"
-                         Watermark="e.g. 192.168.1.100 or 127.0.0.1"
-                         FontSize="16"
-                         Height="40"/>
+                         Watermark="192.168.1.100 or 127.0.0.1"
+                         FontSize="15"
+                         Height="44"
+                         Padding="12"/>
             </StackPanel>
             
-            <!--status area-->
-            <Border Background="#3B4252"
-                    CornerRadius="8"
-                    Padding="15"
-                    MinHeight="100">
-                <StackPanel Spacing="10">
+            <!-- Status card -->
+            <Border Classes="card"
+                    Padding="20"
+                    MinHeight="120">
+                <StackPanel Spacing="12">
                     <TextBlock x:Name="StatusText"
                                Text="Ready to connect"
-                               TextWrapping="Wrap"/>
+                               TextWrapping="Wrap"
+                               FontSize="14"/>
                     
-                    <ProgressBar x:Name="ReceiveProgress"
-                                 IsVisible="False"
-                                 Height="8"/>
-                    
-                    <TextBlock x:Name="ProgressText"
-                               IsVisible="False"
-                               FontSize="12"
-                               Opacity="0.7"/>
+                    <StackPanel x:Name="ProgressPanel"
+                                IsVisible="False"
+                                Spacing="8">
+                        <ProgressBar x:Name="ReceiveProgress"
+                                     Height="8"
+                                     CornerRadius="4"/>
+                        <TextBlock x:Name="ProgressText"
+                                   FontSize="12"
+                                   Opacity="0.7"/>
+                    </StackPanel>
                 </StackPanel>
             </Border>
             
         </StackPanel>
         
-        
+        <!-- Buttons -->
         <StackPanel Grid.Row="2" 
                     Orientation="Horizontal" 
                     HorizontalAlignment="Right"
-                    Spacing="10">
+                    Spacing="12"
+                    Margin="0,24,0,0">
             <Button Content="Cancel"
                     Click="OnCancelClicked"
-                    Width="100"/>
+                    Width="110"
+                    Height="40"/>
             <Button x:Name="ConnectButton"
                     Content="Connect"
                     Click="OnConnectClicked"
-                    Width="100"/>
+                    Classes="primary"
+                    Width="110"
+                    Height="40"/>
         </StackPanel>
         
     </Grid>

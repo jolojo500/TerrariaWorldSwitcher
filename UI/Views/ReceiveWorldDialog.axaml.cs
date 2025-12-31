@@ -40,8 +40,7 @@ public partial class ReceiveWorldDialog : Window
         IpInput.IsEnabled = false;
         
         StatusText.Text = $"Connecting to {hostIp}...";
-        ReceiveProgress.IsVisible = true;
-        ProgressText.IsVisible = true;
+        ProgressPanel.IsVisible = true;
         
         try
         {

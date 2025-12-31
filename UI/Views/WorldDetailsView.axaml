@@ -2,75 +2,95 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              x:Class="UI.Views.WorldDetailsView">
     
-    <Grid RowDefinitions="Auto,*,Auto" Margin="20">
+    <Grid RowDefinitions="Auto,*" Margin="30,20">
         
-        <!-- Header World info -->
-        <StackPanel Grid.Row="0" Spacing="15">
-            <Button Content="⬅️ Back" 
+        <!-- Header -->
+        <StackPanel Grid.Row="0" Spacing="20" Margin="0,0,0,30">
+            <Button Content="← Back" 
                     Click="OnBackClicked"
-                    Width="100"
+                    Width="90"
                     HorizontalAlignment="Left"/>
             
-            <TextBlock x:Name="WorldNameText" 
-                       FontSize="32" 
-                       FontWeight="Bold"/>
-            
-            <TextBlock x:Name="WorldInfoText"
-                       FontSize="14"
-                       Opacity="0.7"/>
+            <StackPanel Spacing="8">
+                <TextBlock x:Name="WorldNameText" 
+                           FontSize="36" 
+                           FontWeight="Bold"
+                           Foreground="#FFFFFF"/>
+                
+                <TextBlock x:Name="WorldInfoText"
+                           FontSize="14"
+                           Opacity="0.6"/>
+            </StackPanel>
         </StackPanel>
         
-        <!-- Main stuff -->
+        <!--Main zone centered -->
         <StackPanel Grid.Row="1" 
                     VerticalAlignment="Center"
                     HorizontalAlignment="Center"
-                    Spacing="20"
-                    Width="400">
+                    Spacing="24"
+                    Width="500">
             
-            <!-- Status box -->
-            <Border Background="#3B4252"
-                    CornerRadius="8"
-                    Padding="20">
-                <StackPanel Spacing="10">
+            <!-- Status card -->
+            <Border Classes="card"
+                    Padding="32">
+                <StackPanel Spacing="16">
                     <TextBlock Text="🚀 Transfer Hosting" 
-                               FontSize="20"
+                               FontSize="24"
                                FontWeight="SemiBold"
-                               HorizontalAlignment="Center"/>
+                               HorizontalAlignment="Center"
+                               Foreground="#FFFFFF"/>
                     
                     <TextBlock x:Name="StatusText"
                                Text="Ready to transfer"
                                HorizontalAlignment="Center"
                                TextWrapping="Wrap"
-                               TextAlignment="Center"/>
+                               TextAlignment="Center"
+                               FontSize="14"
+                               Opacity="0.8"/>
                     
-                    <!-- IP shown when waiting  -->
-                    <TextBlock x:Name="IpText"
-                               IsVisible="False"
-                               FontSize="18"
-                               FontWeight="Bold"
-                               HorizontalAlignment="Center"
-                               Foreground="#88C0D0"/>
+                    <!--ip box -->
+                    <Border x:Name="IpBox"
+                            IsVisible="False"
+                            Background="#1E1E1E"
+                            CornerRadius="6"
+                            Padding="16"
+                            Margin="0,8,0,0">
+                        <StackPanel Spacing="6">
+                            <TextBlock Text="Share this IP with the client:"
+                                       FontSize="12"
+                                       Opacity="0.6"
+                                       HorizontalAlignment="Center"/>
+                            <TextBlock x:Name="IpText"
+                                       FontSize="20"
+                                       FontWeight="Bold"
+                                       HorizontalAlignment="Center"
+                                       Foreground="#0078D4"/>
+                        </StackPanel>
+                    </Border>
                     
-                    <!-- Progress bar -->
-                    <ProgressBar x:Name="TransferProgress"
-                                 IsVisible="False"
-                                 Height="10"
-                                 Margin="0,10,0,0"/>
-                    
-                    <TextBlock x:Name="ProgressText"
-                               IsVisible="False"
-                               HorizontalAlignment="Center"
-                               FontSize="12"
-                               Opacity="0.7"/>
+                    <!-- Progress -->
+                    <StackPanel x:Name="ProgressPanel" 
+                                IsVisible="False"
+                                Spacing="8"
+                                Margin="0,8,0,0">
+                        <ProgressBar x:Name="TransferProgress"
+                                     Height="8"
+                                     CornerRadius="4"/>
+                        <TextBlock x:Name="ProgressText"
+                                   HorizontalAlignment="Center"
+                                   FontSize="13"
+                                   Opacity="0.7"/>
+                    </StackPanel>
                 </StackPanel>
             </Border>
             
-         
+            <!--Transfer Button -->
             <Button x:Name="TransferButton"
-                    Content="🚀 Start Transfer (Host Mode)"
+                    Content="Start Transfer (Host Mode)"
                     Click="OnTransferHostClicked"
+                    Classes="primary"
                     HorizontalAlignment="Stretch"
-                    Height="50"
+                    Height="56"
                     FontSize="16"/>
             
         </StackPanel>
